@@ -31,6 +31,26 @@ We consolidates several commonly used spectral preprocessing and feature selecti
 * Spectral Preprocessing:airPLS,MSC,SNV,Detrend,Derivative
 * Feature Selection:SPA,Univariate,UVE,RFE
 An example of data processing：
+
+    ```pythonfrom feature import rfe
+    from process import derivative
+    
+    #Load the data
+    
+    ...Loading your sprectral data
+    
+    #Data partitioning
+    X_train, X_test, y_train, y_test = train_test_split(spectra, y, test_size=0.25, random_state=42, shuffle=True)
+    
+    #Spectral preprocessing
+    X_train_de = derivative(X_train)
+    X_test_de = derivative(X_test)
+    
+    #Feature Selection
+    X_train_rfe, X_test_rfe = rfe(X_train_de, y_train, X_test_de)
+    #!/usr/bin/env python3
+    print("Hello, World!");
+    ```
     
     from feature import rfe
     from process import derivative
