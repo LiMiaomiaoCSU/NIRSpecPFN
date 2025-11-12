@@ -28,13 +28,13 @@ Our three experimental datasets are as follows:
 
 ## 2. Dataprocessing
 We consolidates several commonly used spectral preprocessing and feature selection methods into a Python package.
-* Spectral Preprocessing:airPLS,MSC,SNV,Detrend,Derivative
-* Feature Selection:SPA,Univariate,UVE,RFE
+* Spectral Preprocessing:airPLS, MSC, SNV, Detrend, Derivative
+* Feature Selection:SPA, Univariate, UVE, RFE
 An example of data processing：
 
     ```python
-    from feature import rfe
     from process import derivative
+    from feature import rfe
     
     #Load the data
     ...Loading your sprectral data
