@@ -1,6 +1,6 @@
 # NIRSpecPFN
 ***
-This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared Spectral Data Based on TabPFN**.
+This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared Spectral Data Based on TabPFN**.  
 We developed a method for Near-Infrared Spectral Analysis.This is a supervised machine learning approach based on the TabPFN, which is a Transformer-Based model. NIRSpecPFN strictly adheres to structured machine learning methodologies, with the framework integrating key steps such as data preprocessing, feature selection, and modeling prediction.
 
 <img width="822" height="462" alt="image" src="https://github.com/user-attachments/assets/a386cf14-b63f-4499-ba50-ff115df63ebe" />
@@ -29,8 +29,8 @@ Our three experimental datasets are as follows:
 ## 2. Dataprocessing
 We consolidates several commonly used spectral preprocessing and feature selection methods into a Python package.
 * Spectral Preprocessing:airPLS, MSC, SNV, Detrend, Derivative
-* Feature Selection:SPA, Univariate, UVE, RFE
-  An example of data processing：
+* Feature Selection:SPA, Univariate, UVE, RFE  
+An example of data processing：
 
     ```python
     from process import derivative
