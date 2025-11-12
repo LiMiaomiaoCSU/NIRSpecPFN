@@ -5,4 +5,30 @@ This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared S
 
 # Package required
 ***
-The entire process of this experiment was implemented in Python 3.12.9.TabPFN v2 requires Python 3.9+ due to newer language features.
+The entire process of this experiment was implemented in Python 3.12.9.
+    
+    ```python
+    #!/usr/bin/python3
+    print("Hello, World!");
+    ```
+# Workflow
+***
+## Dataset
+Our three experimental datasets are as follows:
+
+## Dataprocessing
+We consolidates several commonly used spectral preprocessing and feature selection methods into a Python package.
+Spectral Preprocessing ：
+Feature Selection：
+Example：
+
+## Modelling and prediction
+
+# Usage
+The example codes for usage is included in the example.ipynb
+
+# Others
+
+
+
+
