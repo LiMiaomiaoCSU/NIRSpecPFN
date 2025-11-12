@@ -14,7 +14,8 @@ We developed a method for Near-Infrared Spectral Analysis.This is a supervised m
     ```
 
 * Compatible versions: 3.9, 3.10, 3.11, 3.12, 3.13.
-The entire process of this experiment was implemented in Python 3.12.9. TabPFN requires Python 3.9+ due to newer language features. For further details regarding the installation and configuration of TabPFN, please refer to [TabPFN](https://github.com/PriorLabs/TabPFN).
+The entire process of this experiment was implemented in Python 3.12.9.  
+TabPFN requires Python 3.9+ due to newer language features. For further details regarding the installation and configuration of TabPFN, please refer to [TabPFN](https://github.com/PriorLabs/TabPFN).
 
 # Workflow
 ***
@@ -32,6 +33,7 @@ We consolidates several commonly used spectral preprocessing and feature selecti
 * Feature Selection:SPA, Univariate, UVE, RFE  
 
 An example of data processing：
+
 
     ```python
     from process import derivative
