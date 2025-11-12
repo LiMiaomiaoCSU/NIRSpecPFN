@@ -1,16 +1,19 @@
 # NIRSpecPFN
 ***
-This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared Spectral Data Based on TabPFN**.We developed a method for Near-Infrared Spectral Analysis.This is a supervised machine learning approach based on the TabPFN, which is a Transformer-Based model. NIRSpecPFN strictly adheres to structured machine learning methodologies, with the framework integrating key steps such as data preprocessing, feature selection, and modeling prediction.
+This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared Spectral Data Based on TabPFN**.
+We developed a method for Near-Infrared Spectral Analysis.This is a supervised machine learning approach based on the TabPFN, which is a Transformer-Based model. NIRSpecPFN strictly adheres to structured machine learning methodologies, with the framework integrating key steps such as data preprocessing, feature selection, and modeling prediction.
 
 <img width="822" height="462" alt="image" src="https://github.com/user-attachments/assets/a386cf14-b63f-4499-ba50-ff115df63ebe" />
 
 # Installation & Setup
 ***
 Official installation of TabPFN (pip)
-   
+
    pip install tabpfn
    
-The entire process of this experiment was implemented in Python 3.12.9.TabPFN requires Python 3.9+ due to newer language features. Compatible versions: 3.9, 3.10, 3.11, 3.12, 3.13.For further details regarding the installation and configuration of TabPFN, please refer to [TabPFN](https://github.com/PriorLabs/TabPFN).
+The entire process of this experiment was implemented in Python 3.12.9.TabPFN requires Python 3.9+ due to newer language features. 
+* Compatible versions: 3.9, 3.10, 3.11, 3.12, 3.13.
+For further details regarding the installation and configuration of TabPFN, please refer to [TabPFN](https://github.com/PriorLabs/TabPFN).
 
 # Workflow
 ***
@@ -24,12 +27,13 @@ Our three experimental datasets are as follows:
 
 ## 2.Dataprocessing
 We consolidates several commonly used spectral preprocessing and feature selection methods into a Python package.
-Spectral Preprocessing ：airPLS,MSC,SNV,Detrend,Derivative
-* Feature Selection：SPA,Univariate,UVE,RFE
-* An example of data processing：
+* Spectral Preprocessing:airPLS,MSC,SNV,Detrend,Derivative
+* Feature Selection:SPA,Univariate,UVE,RFE
+An example of data processing：
 
-    from feature import derivative
-    from process import rfe
+
+    from process import derivative
+    from feature import rfe
 
     #Load the data
     ...Loading your spectra data
@@ -54,8 +58,8 @@ An example of modelling and prediction：
 The example codes for usage is included in the example.ipynb
 
 # Information of maintainers
-*zmzhang@csu.edu.cn
-*242311023@csu.edu.cn
+* zmzhang@csu.edu.cn
+* 242311023@csu.edu.cn
 
 
 
