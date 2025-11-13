@@ -10,8 +10,8 @@ from preprocessing.feature import rfe
 
 
 # Load the data
-train_path = "D:/A/CSU/数据集/CGL/CGL_nir_cal.xlsx"
-test_path = "D:/A/CSU/数据集/CGL/CGL_nir_test.xlsx"
+train_path = "D:/A/CSU/CGL/CGL_nir_cal.xlsx"
+test_path = "D:/A/CSU/CGL/CGL_nir_test.xlsx"
 
 df_train = pd.read_excel(train_path)
 df_test = pd.read_excel(test_path)
@@ -58,14 +58,14 @@ def evaluate_performance(y_true, y_pred, name):
     rmse = np.sqrt(mse)
     r2 = r2_score(y_true, y_pred)
     sep = calculate_sep(y_true, y_pred)
-    print(f"\n--- {name} 性能指标 ---")
+    print(f"\n--- {name} metric ---")
     print(f"R2: {r2:.4f}")
     print(f"MAE: {mae:.4f}")
     print(f"MSE: {mse:.4f}")
     print(f"RMSE: {rmse:.4f}")
     print(f"SEP: {sep:.4f}")
 
-evaluate_performance(y_train, y_train_pred_tabpfn, "TabPFN-训练集")
-evaluate_performance(y_test, y_test_pred_tabpfn, "TabPFN-测试集")
-evaluate_performance(y_train, y_train_pred_plsr, "PLSR-训练集")
-evaluate_performance(y_test, y_test_pred_plsr, "PLSR-测试集")
+evaluate_performance(y_train, y_train_pred_tabpfn, "TabPFN-train")
+evaluate_performance(y_test, y_test_pred_tabpfn, "TabPFN-test")
+evaluate_performance(y_train, y_train_pred_plsr, "PLSR-train")
+evaluate_performance(y_test, y_test_pred_plsr, "PLSR-test")
