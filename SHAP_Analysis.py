@@ -12,7 +12,7 @@ import matplotlib.colors as mcolors
 
 device = 'cpu'
 # Load the data
-data_path = 'D:/A/CSU/数据集/corn_xlsl/m5_corn.xlsx'
+data_path = 'D:/A/CSU/corn_xlsl/m5_corn.xlsx'
 
 df = pd.read_excel(data_path)
 spectra = df.iloc[:, :700].values  
@@ -57,7 +57,7 @@ else:
     base_dir = os.getcwd()          
 out_dir = os.path.join(base_dir, "701_shap_results")
 os.makedirs(out_dir, exist_ok=True)
-print("SHAP 输出目录：", out_dir)
+print("SHAP path：", out_dir)
 
 bg_n = min(30, X_tr_rfe.shape[0])
 nt = min(50, X_te_rfe.shape[0])
@@ -104,4 +104,5 @@ plt.tight_layout()
 plt.savefig(os.path.join(out_dir, "shap_dot.png"), dpi=300)
 plt.close()
 
-print("所有SHAP图和特征依赖图已保存到：", out_dir)
+
+print("all files path：", out_dir)
