@@ -19,7 +19,7 @@ start_time = time.time()
 experiment_start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 # Load the data
-data_path = 'D:/A/CSU/数据集/corn_xlsl/m5_corn.xlsx'
+data_path = 'D:/A/CSU/corn_xlsl/m5_corn.xlsx'
 
 df = pd.read_excel(data_path)
 spectra = df.iloc[:, :700].values  
@@ -40,7 +40,7 @@ def evaluate_performance(y_true, y_pred, dataset_name):
     r2 = r2_score(y_true, y_pred)
     sep = calculate_sep(y_true, y_pred)
     
-    print(f"\n--- {dataset_name} 性能指标 ---")
+    print(f"\n--- {dataset_name} metrics ---")
     print(f"R-squared (R2): {r2:.4f}")
     print(f"Mean Absolute Error (MAE): {mae:.4f}")
     print(f"Mean Squared Error (MSE): {mse:.4f}")
@@ -64,17 +64,17 @@ def calculate_average_metrics(results_list):
 tabpfn_train_results, tabpfn_test_results = [], []
 plsr_train_results, plsr_test_results = [], []
 
-print("\n--- 开始5折交叉验证 ---")
+print("\n--- K-fold cross ---")
 
 # K-fold cross-validation
 kf = KFold(n_splits=5, shuffle=True, random_state=42)
 for fold, (train_idx, test_idx) in enumerate(kf.split(spectra), 1):
-    print(f"\n=== 第 {fold} 折 ===")
+    print(f"\n=== {fold} fold ===")
     
     X_train, X_test = spectra[train_idx], spectra[test_idx]
     y_train, y_test = y[train_idx], y[test_idx]
     
-    print(f"训练集大小: {X_train.shape[0]}, 测试集大小: {X_test.shape[0]}")
+    print(f"train: {X_train.shape[0]}, test: {X_test.shape[0]}")
 
     # Dataprocessing
     preprocess_method = 'Derivative'
@@ -90,8 +90,8 @@ for fold, (train_idx, test_idx) in enumerate(kf.split(spectra), 1):
     tabpfn_regressor.fit(X_train_rfe, y_train)
     y_train_pred_tabpfn = tabpfn_regressor.predict(X_train_rfe)
     y_test_pred_tabpfn = tabpfn_regressor.predict(X_test_rfe)
-    tabpfn_train_results.append(evaluate_performance(y_train, y_train_pred_tabpfn, f"TabPFN-第{fold}折训练集"))
-    tabpfn_test_results.append(evaluate_performance(y_test, y_test_pred_tabpfn, f"TabPFN-第{fold}折测试集"))
+    tabpfn_train_results.append(evaluate_performance(y_train, y_train_pred_tabpfn, f"TabPFN-{fold}fold train"))
+    tabpfn_test_results.append(evaluate_performance(y_test, y_test_pred_tabpfn, f"TabPFN-第{fold}fold test"))
 
     # PLSR-tuning
     param_grid = {'n_components': [5, 10, 15, 20]}  
@@ -99,15 +99,15 @@ for fold, (train_idx, test_idx) in enumerate(kf.split(spectra), 1):
     grid = GridSearchCV(pls, param_grid, cv=3, scoring='neg_mean_squared_error')
     grid.fit(X_train_rfe, y_train)
     best_pls = grid.best_estimator_
-    print(f"PLSR最佳主成分数: {grid.best_params_['n_components']}")
+    print(f"PLSR best params: {grid.best_params_['n_components']}")
     y_train_pred_plsr = best_pls.predict(X_train_rfe).ravel()
     y_test_pred_plsr = best_pls.predict(X_test_rfe).ravel()
-    plsr_train_results.append(evaluate_performance(y_train, y_train_pred_plsr, f"PLSR-第{fold}折训练集"))
-    plsr_test_results.append(evaluate_performance(y_test, y_test_pred_plsr, f"PLSR-第{fold}折测试集"))
+    plsr_train_results.append(evaluate_performance(y_train, y_train_pred_plsr, f"PLSR-{fold}fold train"))
+    plsr_test_results.append(evaluate_performance(y_test, y_test_pred_plsr, f"PLSR-{fold}fold test"))
     
-print("\n=== TabPFN模型5折平均性能 ===")
+print("\n=== TabPFN 5 fold average metric ===")
 print(pd.DataFrame(tabpfn_test_results).mean())
-print("\n=== PLSR模型5折平均性能 ===")
+print("\n=== PLSR 5 fold average metric  ===")
 print(pd.DataFrame(plsr_test_results).mean())
     
 end_time = time.time()
@@ -121,19 +121,19 @@ plsr_test_avg = calculate_average_metrics(plsr_test_results)
 
 # Save results
 info_rows = [
-    ['实验时间', experiment_start_time],
-    ['所需时间（秒）', f"{elapsed_time:.2f}"],
-    ['使用设备', device],
-    ['数据集路径', data_path],
-    ['总样本数', len(spectra)],
-    ['原始特征维度', spectra.shape[1]],
-    ['标签范围', f"{y.min():.4f} - {y.max():.4f}"],
-    ['标签均值', f"{y.mean():.4f}"],
-    ['标签标准差', f"{y.std():.4f}"],
-    ['预处理方法', preprocess_method],
-    ['特征选择方法', feature_selection_method],
+    ['experiment time', experiment_start_time],
+    ['elapsed_time(s)', f"{elapsed_time:.2f}"],
+    ['device', device],
+    ['data_path', data_path],
+    ['samples', len(spectra)],
+    ['spectra shape', spectra.shape[1]],
+    ['y range', f"{y.min():.4f} - {y.max():.4f}"],
+    ['y.mean', f"{y.mean():.4f}"],
+    ['y.std', f"{y.std():.4f}"],
+    ['preprocess_method', preprocess_method],
+    ['feature_selection_method', feature_selection_method],
     ['', ''],
-    ['模型', '数据集', 'R2均值±std', 'MAE均值±std', 'MSE均值±std', 'RMSE均值±std', 'SEP均值±std']
+    ['model', 'dataset', 'R2-average±std', 'MAE-average±std', 'MSE-average±std', 'RMSE-average±std', 'SEP-average±std']
 ]
 
 def avg_row(avg, model, dataset):
@@ -156,7 +156,7 @@ info_df = pd.DataFrame(info_rows)
 def detail_df(results, model_name):
     df = pd.DataFrame(results)
     df['fold'] = np.arange(1, len(df)+1)
-    df['set'] = ['train']*len(df) if '训练集' in results[0].get('dataset_name', '') else ['test']*len(df)
+    df['set'] = ['train']*len(df) if 'train' in results[0].get('dataset_name', '') else ['test']*len(df)
     if 'dataset_name' in results[0]:
         df['dataset_name'] = [r['dataset_name'] for r in results]
     return df
@@ -181,10 +181,11 @@ y_col_index = df.columns[y_col_num]    # column index of label
 result_file = f"{data_file_tag}_y{y_col_index}_{preprocess_method}_{feature_selection_method}_results.xlsx"
 
 with pd.ExcelWriter(result_file) as writer:
-    info_df.to_excel(writer, sheet_name='实验信息与平均指标', header=False, index=False)
+    info_df.to_excel(writer, sheet_name='experiment information and average metric', header=False, index=False)
     tabpfn_detail.to_excel(writer, sheet_name='TabPFN', index=False)
     plsr_detail.to_excel(writer, sheet_name='PLSR', index=False)
 
-print(f"\n结果已保存到: {result_file}") 
+print(f"\nresult_path: {result_file}") 
+
 
 
