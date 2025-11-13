@@ -65,7 +65,8 @@ model.fit(X_train_rfe, y_train)
 ```
 
 # Usage
-The example codes for usage is included in the example.ipynb
+The example codes for usage is included in the [example.ipynb](example.ipynb).
+
 
 # Information of maintainers
 * zmzhang@csu.edu.cn
