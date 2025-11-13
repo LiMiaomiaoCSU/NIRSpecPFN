@@ -2,7 +2,7 @@
 ***
 This is the code repo for the paper **Precise Modeling of Scarce Near-Infrared Spectral Data Based on TabPFN**.  
 We developed a method for Near-Infrared Spectral Analysis.This is a supervised machine learning approach based on the TabPFN, which is a Transformer-Based model.  
-NIRSpecPFN strictly adheres to structured machine learning methodologies, with the framework integrating key steps such as data preprocessing, feature selection, and modeling prediction.
+NIRSpecPFN strictly adheres to structured machine learning methodologies, with the framework integrating key steps such as [data preprocessing](## 2. Dataprocessing), feature selection, and modeling prediction.
 
 <img width="1351" height="760" alt="屏幕截图 2025-11-13 223420" src="https://github.com/user-attachments/assets/91ff5457-85fc-4b5b-97e1-37e6962ff971" />
 
@@ -66,7 +66,8 @@ model.fit(X_train_rfe, y_train)
 
 # Usage
 The example codes for usage is included in the [example.ipynb](example.ipynb).
-
+* [SHAP]():for SHAP analysis
+* [corn](),:experiment codes
 
 # Information of maintainers
 * zmzhang@csu.edu.cn
