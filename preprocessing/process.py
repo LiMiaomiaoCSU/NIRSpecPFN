@@ -27,8 +27,8 @@ def derivative(X):
         for i in range(X.shape[0]):
             derivative_X[i, 0] = X[i, 1] - X[i, 0] 
             for j in range(1, X.shape[1] - 1):
-                derivative_X[i, j] = (X[i, j + 1] - X[i, j - 1]) / 2  # 中心差分
-            derivative_X[i, -1] = X[i, -1] - X[i, -2]  # 后向差分
+                derivative_X[i, j] = (X[i, j + 1] - X[i, j - 1]) / 2  
+            derivative_X[i, -1] = X[i, -1] - X[i, -2]  
         return derivative_X
 
 
@@ -69,3 +69,4 @@ def airPLS(X, lam=100, porder=1, itermax=15):
             w[0] = w[-1] = np.exp(it * (d[neg].max()) / dssn)
         X_corr[i, :] = x - z
     return X_corr
+
