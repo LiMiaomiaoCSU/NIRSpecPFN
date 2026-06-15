@@ -379,8 +379,8 @@ plt.rcParams["axes.unicode_minus"] = False
 
 # 8a. SE boxplot
 fig, ax = plt.subplots(figsize=(6, 5))
-data_to_plot = [se_plsr, se_svr, se_tab]
-bp = ax.boxplot(data_to_plot, tick_labels=["PLSR", "SVR", "NIRSpecPFN"],
+data_to_plot = [se_plsr, se_svr, se_tab, se_rf]
+bp = ax.boxplot(data_to_plot, tick_labels=["PLSR", "SVR", "NIRSpecPFN", "RF"],
                 whis=3.0, showfliers=False)
 ax.set_ylabel("Sample-level Squared Error (SE)", fontsize=18)
 ax.set_title(f"Wheat {target_property}: SE Distribution\n(SE ∝ SEP², fixed test set)", fontsize=15)
@@ -390,7 +390,7 @@ y_max = max(d.max() for d in data_to_plot)
 y_min = min(d.min() for d in data_to_plot)
 yr = max(y_max - y_min, 1e-6)
 
-for i, m in enumerate(["PLSR", "SVR", "NIRSpecPFN"], 1):
+for i, m in enumerate(["PLSR", "SVR", "NIRSpecPFN", "RF"], 1):
     rmse = final_df[final_df["Model"] == m]["Test_RMSE"].values[0]
     sep = final_df[final_df["Model"] == m]["Test_SEP"].values[0]
     sig = sig_df[sig_df["Model"] == m]["Sig"].values[0] if m in sig_df["Model"].values else ""
