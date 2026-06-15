@@ -73,7 +73,7 @@ preds = model.predict(X_query_deriv)
 # Usage
 The example codes for usage is included in the [example.ipynb](example.ipynb).
 
-* Regression performance: [Soil](soil), [Wheat](wheat), [Tecator](tecator)
+* Regression performance: [Model](Model)
 * Relative analysis: [Analysis](analysis)
 
 # Information of maintainers
